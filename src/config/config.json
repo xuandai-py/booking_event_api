@@ -1,0 +1,27 @@
+{
+  "development": {
+    "username": "admin",
+    "password": "00000",
+    "database": "health_booking_event",
+    "host": "172.18.0.2",
+    "dialect": "mysql",
+    "query": {"raw": true},
+    "timezone": "+07:00"
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
+
+
