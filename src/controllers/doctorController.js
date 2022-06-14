@@ -55,10 +55,65 @@ let getDetailDoctorById = async (req, res) => {
     }
 }
 
+let bulkCreateSchedule = async (req, res) => {
+    try {
+        let response = await doctorService.bulkCreateSchedule(req.body);
+        return res.status(200).json(response);
+    } catch (error) {
+        console.error("bulkCreateSchedule: ", error);
+        return res.status(200).json({
+            errCode: -1,
+            message: 'Error from server'
+        })
+    }
+}
+
+let getScheduleByDate = async (req, res) => {
+    try {
+        let response = await doctorService.getScheduleByDate(req.query.doctorId, req.query.date);
+        return res.status(200).json(response);
+    } catch (error) {
+        console.error("getScheduleByDate: ", error);
+        return res.status(200).json({
+            errCode: -1,
+            message: 'Error from server'
+        })
+    }
+}
+
+let getExtraInforDoctorById = async (req, res) => {
+    try {
+        let response = await doctorService.getExtraInforDoctorById(req.query.doctorId, req.query.date);
+        return res.status(200).json(response);
+    } catch (error) {
+        console.error("getExtraInforDoctorById: ", error);
+        return res.status(200).json({
+            errCode: -1,
+            message: 'Error from server'
+        })
+    }
+}
+
+let getProfileDoctorById = async (req, res) => {
+    try {
+        let response = await doctorService.getProfileDoctorById(req.query.doctorId);
+        return res.status(200).json(response);
+    } catch (error) {
+        console.error("getProfileDoctorById: ", error);
+        return res.status(200).json({
+            errCode: -1,
+            message: 'Error from server'
+        })
+    }
+}
 
 module.exports = {
     getTopDoctorHome: getTopDoctorHome,
     getAllDoctors: getAllDoctors,
     postDoctorInfo: postDoctorInfo,
     getDetailDoctorById: getDetailDoctorById,
+    bulkCreateSchedule: bulkCreateSchedule,
+    getScheduleByDate: getScheduleByDate,
+    getExtraInforDoctorById: getExtraInforDoctorById,
+    getProfileDoctorById: getProfileDoctorById,
 }

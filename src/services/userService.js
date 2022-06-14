@@ -219,10 +219,14 @@ let getAllCodeService = (typeInput) => {
 
                 let res = {}
                 let allcode = await db.Allcode.findAll({
-                    where: { type: typeInput }
+                    where: { type: typeInput },
+                    //attributes: ['id', 'keyMap']
                 })
                 res.errCode = 0
                 res.data = allcode
+                console.log('--------------------------------');
+                console.log(allcode);
+                console.log('--------------------------------');
                 resolve(res)
             }
         } catch (error) {
