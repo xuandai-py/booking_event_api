@@ -26,7 +26,23 @@ let getAllSpecialty = async (req, res) => {
     }
 }
 
+let getDetailSpecialtyById = async (req, res) => {
+    try {
+        let response = await specialtyService.getDetailSpecialtyById(req.query.id, req.query.location);
+        return res.status(200).json(response);
+    } catch (error) {
+        console.error("createSpecialty: ", error);
+        return res.status(200).json({
+            errCode: -1,
+            message: 'Error from server'
+        })
+    }
+}
+
+
+
 module.exports = {
     createSpecialty: createSpecialty,
     getAllSpecialty: getAllSpecialty,
+    getDetailSpecialtyById: getDetailSpecialtyById,
 }
