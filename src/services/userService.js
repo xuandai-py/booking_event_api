@@ -15,7 +15,7 @@ let handleUserLogin = (email, password) => {
                 let user = await db.User.findOne({
                     where: { email: email },
                     raw: true,
-                    attributes: ['email', 'password', 'firstName', 'lastName', 'address', 'roleId'], // defind visable columns <> 
+                    attributes: ['id', 'email', 'password', 'firstName', 'lastName', 'address', 'roleId'], // defind visable columns <> 
                 })
                 if (user) {
                     console.log("user loged in: ", user);

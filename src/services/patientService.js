@@ -3,8 +3,8 @@ import { sendEmail } from './emailService'
 import { v4 as uuidv4 } from 'uuid'
 require('dotenv').config()
 
-let buildUrlEmail = (doctorId,token) => {
-    
+let buildUrlEmail = (doctorId, token) => {
+
     let result = `${process.env.URL}/verify-booking?token=${token}&doctorId=${doctorId}`
     return result
 
@@ -13,14 +13,16 @@ let buildUrlEmail = (doctorId,token) => {
 let postAppointment = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
-            if (!data.email || !data.doctorId || !data.timeType || !data.date || !data.fullName) {
+            if (!data.email || !data.doctorId || !data.timeType || !data.date || !data.fullName ||
+                !data.selectedGender || !data.address || !data.phoneNumber
+            ) {
                 resolve({
                     errCode: 1,
                     errMessage: 'Missing required parameters'
                 })
             } else {
-
-
+                console.log('--------------------------------');
+                console.log(data);
                 let token = uuidv4();
 
                 await sendEmail({
@@ -38,7 +40,12 @@ let postAppointment = (data) => {
                     },
                     defaults: {
                         email: data.email,
-                        roleId: 'R3'
+                        roleId: 'R3',
+                        gender: data.selectedGender,
+                        address: data.address,
+                        firstName: data.fullName,
+                        phoneNumber: data.phoneNumber
+
                     }
                 })
 
@@ -55,7 +62,7 @@ let postAppointment = (data) => {
                             timeType: data.timeType,
                             token: token
                         }
-                       
+
                     })
                 }
 
@@ -95,10 +102,10 @@ let postVerifyAppointment = (data) => {
                 console.log('-----------------------------');
 
                 if (appointment) {
-                    appointment.statusId= 'S2'
+                    appointment.statusId = 'S2'
                     await appointment.save();
 
-                    
+
                     resolve({
                         errCode: 0,
                         errMessage: 'Update success!!!'
